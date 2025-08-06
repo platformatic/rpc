@@ -1,9 +1,10 @@
 import { deepStrictEqual, strictEqual } from 'node:assert'
 import { resolve } from 'node:path'
 import { test } from 'node:test'
+import { pathToFileURL } from 'node:url'
 
 test('should generate an openapi schema from a ts app', async t => {
-  const { app } = await import(resolve(import.meta.dirname, 'fixtures/js-app-1/index.js'))
+  const { app } = await import(pathToFileURL(resolve(import.meta.dirname, 'fixtures/js-app-1/index.js')))
   await app.ready()
 
   t.after(() => app.close())
